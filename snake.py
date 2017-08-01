@@ -101,7 +101,7 @@ def move_snake():
         food.clearstamp(food_stamps[food_ind])
         food_pos.pop(food_ind)
         food_stamps.pop(food_ind)
-        print("you have eaten the food!")
+        print("you have eatent the food!")
 
     my_pos=snake.pos()
     pos_list.append(my_pos)
@@ -116,7 +116,7 @@ def move_snake():
     new_y_pos = new_pos[1]
 
     if new_x_pos >= RIGHT_EDGE:
-        print("you hit the right edge! game over !")
+        print("you hit the rtight edge! game over !")
         quit()
 
     elif new_x_pos <= LEFT_EDGE:
@@ -153,5 +153,8 @@ def make_food():
 
     food_x = random.randint(min_x,max_x)*SQUARE_SIZE
     food_y = random.randint(min_y,max_y)*SQUARE_SIZE
-
+    food.goto (food_x,food_y)
+    stamp1 = food.stamp()
+    food_stamps.append(stamp1)
+    
     
