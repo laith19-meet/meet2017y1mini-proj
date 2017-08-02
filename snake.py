@@ -13,7 +13,7 @@ pos_list = []
 stamp_list = []
 food_pos = []
 food_stamps = []
-
+#the snake:
 snake = turtle.clone()
 snake.shape("square")
 snake.color("red")
@@ -48,7 +48,7 @@ UP_EDGE = 250
 DOWN_EDGE = -250
 RIGHT_EDGE = 400
 LEFT_EDGE = -400
-
+#the buttons:
 def up():
     global direction
     direction = UP
@@ -59,12 +59,12 @@ def left():
     direction = LEFT
     print("you pressed the left key !")
     
-def down():
+def down(): 
     global direction
     direction = DOWN
     print("you pressed the down key !")
 
-def right():
+def right():    
     global direction
     direction = RIGHT
     print("you pressed the right key !")
@@ -74,7 +74,7 @@ turtle.onkeypress(left, LEFT_ARROW)
 turtle.onkeypress(down, DOWN_ARROW)
 turtle.onkeypress(right, RIGHT_ARROW)
 turtle.listen()
-
+#moving the snake:
 def move_snake():
     my_pos = snake.pos()
     x_pos = my_pos[0]
@@ -95,8 +95,6 @@ def move_snake():
     elif direction==DOWN:
         snake.goto(x_pos , y_pos - SQUARE_SIZE)
         print("you moved down!")
-def snake_grow():
-        stamps_list.append(snake.stamp())
         
     if snake.pos() in food_pos:
         food_ind = food_pos.index(snake.pos())
@@ -137,7 +135,7 @@ def snake_grow():
         print("you hit the bottom edge! game over !")
         quit()
         
-    if pos_list[-1] in pos_list[:-1] :
+    if snake.pos() in pos_list[:-2] :
         print ("you hit your self! bye !")
         quit()
     turtle.ontimer(move_snake,time_step)
@@ -149,6 +147,10 @@ food_pos = [(100,100) , (-100,100) , (-100,-100) , (100,-100)]
 food = turtle.clone()
 food.shape("trash.gif")
 
+def grow_snake():
+    stamp3 = snake.stamp()
+    stamp_list.append(stamp3)
+    pos_list.append(stamp3)
 
 
 for this_food_pos in food_pos :
@@ -168,7 +170,7 @@ def make_food():
     stamp1 = food.stamp()
     food_stamps.append(stamp1)
     food_pos.append(food.pos())
-    snake_grow()
+    grow_snake()
 
 
 
