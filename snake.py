@@ -16,7 +16,7 @@ food_stamps = []
 
 snake = turtle.clone()
 snake.shape("square")
-
+snake.color("red")
 turtle.hideturtle()
 
 for num in range (START_LENGTH) :
@@ -79,7 +79,7 @@ def move_snake():
     my_pos = snake.pos()
     x_pos = my_pos[0]
     y_pos = my_pos[1]
-    
+
     if direction==RIGHT:
         snake.goto(x_pos + SQUARE_SIZE, y_pos)
         print("You moved right!")
@@ -95,13 +95,17 @@ def move_snake():
     elif direction==DOWN:
         snake.goto(x_pos , y_pos - SQUARE_SIZE)
         print("you moved down!")
+def snake_grow():
+        stamps_list.append(snake.stamp())
         
-    if snake.pos()  in food_pos:
+    if snake.pos() in food_pos:
         food_ind = food_pos.index(snake.pos())
         food.clearstamp(food_stamps[food_ind])
         food_pos.pop(food_ind)
         food_stamps.pop(food_ind)
         print("you have eatent the food!")
+        make_food()
+        
 
     my_pos=snake.pos()
     pos_list.append(my_pos)
@@ -110,6 +114,8 @@ def move_snake():
     old_stamp = stamp_list.pop(0)
     snake.clearstamp(old_stamp)
     pos_list.pop(0)
+
+
 
     new_pos = snake.pos()
     new_x_pos = new_pos[0]
@@ -131,7 +137,11 @@ def move_snake():
         print("you hit the bottom edge! game over !")
         quit()
         
+    if pos_list[-1] in pos_list[:-1] :
+        print ("you hit your self! bye !")
+        quit()
     turtle.ontimer(move_snake,time_step)
+    
 move_snake()
 
 turtle.register_shape("trash.gif")
@@ -140,21 +150,124 @@ food = turtle.clone()
 food.shape("trash.gif")
 
 
+
 for this_food_pos in food_pos :
     food.goto (this_food_pos)
     stampo=food.stamp()
     food_stamps.append(stampo)
 
 def make_food():
-    min_x=-int(size_x/2/SQUARE_SIZE)+1
-    man_x=int(size_x/2/SQUARE_SIZE)-1
-    min_y=-int(size_y/2/SQUARE_SIZE)-1
-    min_y=-int(size_y/2/SQUARE_SIZE)+1
+    min_x=-int(SIZE_X/2/SQUARE_SIZE)+1
+    max_x=int(SIZE_X/2/SQUARE_SIZE)-1
+    min_y=-int(SIZE_Y/2/SQUARE_SIZE)-1
+    max_y=int(SIZE_Y/2/SQUARE_SIZE)+1
 
     food_x = random.randint(min_x,max_x)*SQUARE_SIZE
     food_y = random.randint(min_y,max_y)*SQUARE_SIZE
     food.goto (food_x,food_y)
     stamp1 = food.stamp()
     food_stamps.append(stamp1)
-    
-    
+    food_pos.append(food.pos())
+    snake_grow()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
