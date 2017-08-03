@@ -1,8 +1,8 @@
 import turtle
 import random  
 turtle.tracer(1,0)
-SIZE_X=800
-SIZE_Y=500
+SIZE_X=815
+SIZE_Y=576
 turtle.setup(SIZE_X, SIZE_Y) 
 
 turtle.penup()
@@ -13,10 +13,10 @@ pos_list = []
 stamp_list = []
 food_pos = []
 food_stamps = []
-#the snake:
+
 snake = turtle.clone()
 snake.shape("square")
-snake.color("red")
+snake.color("green")
 turtle.hideturtle()
 
 for num in range (START_LENGTH) :
@@ -48,7 +48,7 @@ UP_EDGE = 250
 DOWN_EDGE = -250
 RIGHT_EDGE = 400
 LEFT_EDGE = -400
-#the buttons:
+
 def up():
     global direction
     direction = UP
@@ -74,7 +74,7 @@ turtle.onkeypress(left, LEFT_ARROW)
 turtle.onkeypress(down, DOWN_ARROW)
 turtle.onkeypress(right, RIGHT_ARROW)
 turtle.listen()
-#moving the snake:
+
 def move_snake():
     my_pos = snake.pos()
     x_pos = my_pos[0]
@@ -134,12 +134,12 @@ def move_snake():
     elif new_y_pos <= DOWN_EDGE:
         print("you hit the bottom edge! game over !")
         quit()
-        
+
     if snake.pos() in pos_list[:-2] :
         print ("you hit your self! bye !")
         quit()
     turtle.ontimer(move_snake,time_step)
-    
+
 move_snake()
 
 turtle.register_shape("trash.gif")
@@ -172,6 +172,23 @@ def make_food():
     food_pos.append(food.pos())
     grow_snake()
 
+#def count_food ():
+    #count = 0
+    #count = count + 1
+    #if grow_snake():
+   #     count_food
+
+  #  return()
+turrtle.write(count_food)
+    
+turtle.goto(400,280)
+turtle.pensize(7)
+turtle.color("red")
+turtle.pendown()
+turtle.goto(400,-280)
+turtle.goto(-400,-280)
+turtle.goto(-400,280)
+turtle.goto(400,280)
 
 
 
