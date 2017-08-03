@@ -1,22 +1,24 @@
 import turtle
 import random  
 turtle.tracer(1,0)
+#window size
 SIZE_X=815
-SIZE_Y=576
+SIZE_Y=540
 turtle.setup(SIZE_X, SIZE_Y) 
 
 turtle.penup()
+#snake size
 SQUARE_SIZE = 20
 START_LENGTH = 6
-
+#lists
 pos_list = []
 stamp_list = []
 food_pos = []
 food_stamps = []
-
+#snake color and shape
 snake = turtle.clone()
-snake.shape("square")
-snake.color("green")
+snake.shape("circle")
+snake.color("red")
 turtle.hideturtle()
 
 for num in range (START_LENGTH) :
@@ -30,7 +32,7 @@ for num in range (START_LENGTH) :
     pos_list.append(my_pos)
     my_stamp = snake.stamp()
     stamp_list.append(my_stamp)
-
+# arrows
 UP_ARROW = 'Up'
 LEFT_ARROW = 'Left'
 DOWN_ARROW = 'Down'
@@ -74,7 +76,7 @@ turtle.onkeypress(left, LEFT_ARROW)
 turtle.onkeypress(down, DOWN_ARROW)
 turtle.onkeypress(right, RIGHT_ARROW)
 turtle.listen()
-
+#moving the snake
 def move_snake():
     my_pos = snake.pos()
     x_pos = my_pos[0]
@@ -103,6 +105,7 @@ def move_snake():
         food_stamps.pop(food_ind)
         print("you have eatent the food!")
         make_food()
+        add_numbers() 
         
 
     my_pos=snake.pos()
@@ -142,11 +145,11 @@ def move_snake():
 
 move_snake()
 
-turtle.register_shape("trash.gif")
+turtle.register_shape("1234.gif")
 food_pos = [(100,100) , (-100,100) , (-100,-100) , (100,-100)]
 food = turtle.clone()
-food.shape("trash.gif")
-
+food.shape("1234.gif")
+# to let the snake grow when you eat
 def grow_snake():
     stamp3 = snake.stamp()
     stamp_list.append(stamp3)
@@ -157,12 +160,12 @@ for this_food_pos in food_pos :
     food.goto (this_food_pos)
     stampo=food.stamp()
     food_stamps.append(stampo)
-
+# to make the turtle make food
 def make_food():
     min_x=-int(SIZE_X/2/SQUARE_SIZE)+1
     max_x=int(SIZE_X/2/SQUARE_SIZE)-1
-    min_y=-int(SIZE_Y/2/SQUARE_SIZE)-1
-    max_y=int(SIZE_Y/2/SQUARE_SIZE)+1
+    min_y=-int(SIZE_Y/2/SQUARE_SIZE)+1
+    max_y=int(SIZE_Y/2/SQUARE_SIZE)-1
 
     food_x = random.randint(min_x,max_x)*SQUARE_SIZE
     food_y = random.randint(min_y,max_y)*SQUARE_SIZE
@@ -172,24 +175,29 @@ def make_food():
     food_pos.append(food.pos())
     grow_snake()
 
-#def count_food ():
-    #count = 0
-    #count = count + 1
-    #if grow_snake():
-   #     count_food
+score_turtle = turtle.clone()
+C=0
+def add_numbers() :        #to make turtle count
+    global C
+    C = C + 1
+    score_turtle.clear()
+    score_turtle.write(C)
+    score_turtle.goto(370,230)
 
-  #  return()
-turrtle.write(count_food)
+# make the borders
+turtle_border = turtle.clone()
     
-turtle.goto(400,280)
-turtle.pensize(7)
-turtle.color("red")
-turtle.pendown()
-turtle.goto(400,-280)
-turtle.goto(-400,-280)
-turtle.goto(-400,280)
-turtle.goto(400,280)
+turtle_border.goto(400,280)
+turtle_border.pensize(7)
+turtle_border.color("brown")
+turtle_border.pendown()
+turtle_border.goto(400,-260)
+turtle_border.goto(-400,-260)
+turtle_border.goto(-400,260)
+turtle_border.goto(400,260)
 
+#change the background color
+bgpic("123.gif")
 
 
 
